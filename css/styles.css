@@ -1,0 +1,399 @@
+/* ================================
+   Variables globales
+================================ */
+:root {
+  --color-fondo: #1e293b;
+  --color-tarjeta: #273449;
+  --color-texto: #f1f5f9;
+  --color-texto-atenuado: #94a3b8;
+
+  --color-principal: #3b82f6;
+  --color-principal-oscuro: #1d4ed8;
+
+  --color-ok: #22c55e;
+  --color-alerta: #f59e0b;
+  --color-error: #ef4444;
+  --color-boton-secundario: #64748b;
+
+  --radio-bordes: 10px;
+  --sombra: 0 8px 20px rgba(0, 0, 0, 0.4);
+  --resalte: 0 0 0 3px rgba(59, 130, 246, 0.35);
+}
+
+/* ================================
+   Reset / base
+================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  line-height: 1.5;
+}
+
+/* ================================
+   Pantalla de inicio
+================================ */
+.centro-pagina {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.tarjeta-login {
+  width: 360px;
+  padding: 20px;
+  border-radius: var(--radio-bordes);
+  background-color: var(--color-tarjeta);
+  box-shadow: var(--sombra);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.titulo-panel {
+  font-size: 1.4rem;
+}
+
+.texto-atenuado {
+  font-size: 0.9rem;
+  color: var(--color-texto-atenuado);
+}
+
+/* ================================
+   Display tipo cajero
+================================ */
+.display-cajero {
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--radio-bordes);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.4);
+  color: var(--color-texto);
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* ================================
+   Teclado numérico
+================================ */
+.teclado {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.teclado button {
+  padding: 12px 0;
+  border: none;
+  border-radius: var(--radio-bordes);
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--sombra);
+  transition: filter 0.2s;
+}
+
+/* Botones numéricos */
+.teclado button[data-num] {
+  background-color: var(--color-principal);
+  color: #fff;
+}
+
+.teclado button[data-num]:hover {
+  filter: brightness(1.1);
+}
+
+/* Botón borrar (←) */
+#btn-borrar {
+  background-color: var(--color-alerta);
+  color: #1f2937;
+  font-weight: bold;
+  font-size: 1.4rem; /* flecha más grande */
+}
+
+#btn-borrar:hover {
+  filter: brightness(1.15);
+}
+
+/* Botón limpiar (C) */
+#btn-limpiar {
+  background-color: var(--color-error);
+  color: #fff;
+}
+
+#btn-limpiar:hover {
+  filter: brightness(1.1);
+}
+
+/* Botón OK */
+#btn-ok {
+  background-color: var(--color-ok);
+  color: #fff;
+}
+
+#btn-ok:hover {
+  filter: brightness(1.1);
+}
+
+/* ================================
+   Botones generales
+================================ */
+.boton {
+  padding: 10px 12px;
+  border-radius: var(--radio-bordes);
+  border: none;
+  background: linear-gradient(
+    180deg,
+    var(--color-principal),
+    var(--color-principal-oscuro)
+  );
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--sombra);
+}
+
+.boton:hover {
+  filter: brightness(1.05);
+}
+
+.boton-secundario {
+  background-color: var(--color-boton-secundario);
+  color: #fff;
+}
+
+.boton-peligro {
+  background: linear-gradient(180deg, var(--color-error), #b91c1c);
+}
+
+/* ================================
+   Cajero principal
+================================ */
+.cajero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Encabezado */
+.encabezado {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--color-texto);
+}
+
+.isologo {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(
+    135deg,
+    var(--color-principal),
+    var(--color-principal-oscuro)
+  );
+  display: grid;
+  place-items: center;
+  border-radius: var(--radio-bordes);
+  font-weight: 700;
+}
+
+.titulo {
+  font-size: 1.2rem;
+}
+
+/* Distribución principal */
+.distribucion {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .distribucion {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================
+   Menú lateral
+================================ */
+.navegacion {
+  position: sticky;
+  top: 20px;
+  background: var(--color-tarjeta);
+  padding: 16px;
+  border-radius: var(--radio-bordes);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: var(--sombra);
+}
+
+.navegacion h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--color-texto-atenuado);
+}
+
+.menu {
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.enlace-menu {
+  display: block;
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: var(--radio-bordes);
+  background: rgba(39, 52, 73, 0.75);
+  color: var(--color-texto);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.enlace-menu:hover {
+  box-shadow: var(--resalte);
+}
+
+.enlace-activo {
+  border-color: var(--color-principal);
+  background: rgba(29, 78, 216, 0.25);
+}
+
+/* ================================
+   Tarjetas de contenido
+================================ */
+.tarjeta {
+  background: var(--color-tarjeta);
+  padding: 20px;
+  border-radius: var(--radio-bordes);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: var(--sombra);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ================================
+   Formularios
+================================ */
+.campos {
+  display: grid;
+  gap: 12px;
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 680px) {
+  .fila {
+    grid-template-columns: 1fr;
+  }
+}
+
+label {
+  font-size: 0.9rem;
+  color: var(--color-texto-atenuado);
+}
+
+input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radio-bordes);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(2, 6, 23, 0.55);
+  color: var(--color-texto);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--color-principal);
+  box-shadow: var(--resalte);
+}
+
+/* ================================
+   Acciones y botones
+================================ */
+.acciones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ================================
+   Estados (alertas)
+================================ */
+.estado {
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.estado-ok {
+  color: var(--color-ok);
+  border-color: rgba(34, 197, 94, 0.45);
+  background: rgba(34, 197, 94, 0.08);
+}
+
+.estado-alerta {
+  color: var(--color-alerta);
+  border-color: rgba(245, 158, 11, 0.45);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.estado-error {
+  color: var(--color-error);
+  border-color: rgba(239, 68, 68, 0.45);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.oculto {
+  display: none !important;
+}
+
+/* ================================
+   Tablas
+================================ */
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: var(--radio-bordes);
+  overflow: hidden;
+}
+
+.tabla th,
+.tabla td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  text-align: left;
+}
+
+.tabla th {
+  font-weight: 700;
+  color: var(--color-texto-atenuado);
+  background: rgba(30, 41, 59, 0.5);
+}
+
+.tabla tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Simulador de Cajero</title>
+
+    <!-- Hoja de estilos -->
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Pantalla de inicio -->
+    <div id="pantalla-inicio" class="centro-pagina">
+      <section id="seccion-inicio" class="tarjeta tarjeta-login">
+        <h2 class="titulo-panel">Iniciar sesión</h2>
+
+        <!-- display como si fuera la pantallita del cajero -->
+        <input
+          id="display"
+          type="text"
+          placeholder="Ingrese su número de cuenta"
+          readonly
+          class="display-cajero"
+        />
+
+        <!-- Teclado numérico -->
+        <div class="teclado">
+          <button data-num="1">1</button>
+          <button data-num="2">2</button>
+          <button data-num="3">3</button>
+
+          <button data-num="4">4</button>
+          <button data-num="5">5</button>
+          <button data-num="6">6</button>
+
+          <button data-num="7">7</button>
+          <button data-num="8">8</button>
+          <button data-num="9">9</button>
+
+          <button id="btn-limpiar">C</button>
+          <button data-num="0">0</button>
+          <button id="btn-ok">OK</button>
+
+          <button id="btn-borrar">←</button>
+        </div>
+
+        <!-- mensajes de estado -->
+        <div id="estado-inicio" class="estado estado-alerta oculto">
+          Complete sus datos.
+        </div>
+      </section>
+    </div>
+
+    <!-- Cajero principal -->
+    <div id="cajero-app" class="cajero oculto">
+      <!-- Cabecera del cajero -->
+      <header class="encabezado">
+        <a class="marca" href="#">
+          <div class="isologo">ATM</div>
+          <div class="titulo">Cajero Web</div>
+        </a>
+      </header>
+
+      <div class="distribucion">
+        <!-- menú lateral con todas las opciones -->
+        <aside class="navegacion" id="menu-lateral">
+          <h3>Operaciones</h3>
+          <ul class="menu">
+            <li>
+              <a href="#saldo" data-seccion="saldo" class="enlace-menu"
+                >Consultar saldo</a
+              >
+            </li>
+            <li>
+              <a href="#retiro" data-seccion="retiro" class="enlace-menu"
+                >Retirar efectivo</a
+              >
+            </li>
+            <li>
+              <a href="#deposito" data-seccion="deposito" class="enlace-menu"
+                >Depositar</a
+              >
+            </li>
+            <li>
+              <a
+                href="#transferencia"
+                data-seccion="transferencia"
+                class="enlace-menu"
+                >Transferir</a
+              >
+            </li>
+            <li>
+              <a href="#historial" data-seccion="historial" class="enlace-menu"
+                >Historial</a
+              >
+            </li>
+            <li>
+              <a href="#pin" data-seccion="pin" class="enlace-menu"
+                >Cambiar PIN</a
+              >
+            </li>
+            <li>
+              <a href="#" id="btn-salir" class="enlace-menu">Salir</a>
+            </li>
+          </ul>
+        </aside>
+
+        <!-- parte central con las secciones -->
+        <main class="rejilla">
+          <!-- saldo -->
+          <section id="seccion-saldo" class="tarjeta oculto">
+            <h2 class="titulo-panel">Saldo</h2>
+            <p class="texto-atenuado">Saldo actual de la cuenta:</p>
+            <div id="saldo-valor" class="estado estado-ok">$0.00</div>
+          </section>
+
+          <!-- retiro -->
+          <section id="seccion-retiro" class="tarjeta oculto">
+            <h2 class="titulo-panel">Retirar efectivo</h2>
+            <div class="campos">
+              <div class="fila">
+                <div>
+                  <label for="monto-retiro">Monto a retirar</label>
+                  <input
+                    id="monto-retiro"
+                    type="number"
+                    min="0"
+                    step="1"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+              <div class="acciones">
+                <button class="boton" id="btn-retirar">Retirar</button>
+              </div>
+              <div id="estado-retiro" class="estado oculto"></div>
+            </div>
+          </section>
+
+          <!-- depósito -->
+          <section id="seccion-deposito" class="tarjeta oculto">
+            <h2 class="titulo-panel">Depositar</h2>
+            <div class="campos">
+              <div class="fila">
+                <div>
+                  <label for="monto-deposito">Monto a depositar</label>
+                  <input
+                    id="monto-deposito"
+                    type="number"
+                    min="0"
+                    step="1"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+              <div class="acciones">
+                <button class="boton" id="btn-depositar">Depositar</button>
+              </div>
+              <div id="estado-deposito" class="estado oculto"></div>
+            </div>
+          </section>
+
+          <!-- transferencias -->
+          <section id="seccion-transferencia" class="tarjeta oculto">
+            <h2 class="titulo-panel">Transferir</h2>
+            <div class="campos">
+              <div class="fila">
+                <div>
+                  <label for="cuenta-destino">Cuenta destino</label>
+                  <input
+                    id="cuenta-destino"
+                    type="text"
+                    placeholder="Ej. 2002"
+                  />
+                </div>
+                <div>
+                  <label for="monto-transferencia">Monto</label>
+                  <input
+                    id="monto-transferencia"
+                    type="number"
+                    min="0"
+                    step="1"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+              <div class="acciones">
+                <button class="boton" id="btn-transferir">Transferir</button>
+              </div>
+              <div id="estado-transferencia" class="estado oculto"></div>
+            </div>
+          </section>
+
+          <!-- historial -->
+          <section id="seccion-historial" class="tarjeta oculto">
+            <h2 class="titulo-panel">Historial de transacciones</h2>
+            <table class="tabla" id="tabla-historial">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Tipo</th>
+                  <th>Detalle</th>
+                  <th>Monto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="4" class="texto-atenuado">Sin movimientos.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- cambiar PIN -->
+          <section id="seccion-pin" class="tarjeta oculto">
+            <h2 class="titulo-panel">Cambiar PIN</h2>
+            <div class="campos">
+              <div class="fila">
+                <div>
+                  <label for="pin-nuevo">Nuevo PIN</label>
+                  <input id="pin-nuevo" type="password" placeholder="••••" />
+                </div>
+                <div>
+                  <label for="pin-repite">Confirmar PIN</label>
+                  <input id="pin-repite" type="password" placeholder="••••" />
+                </div>
+              </div>
+              <div class="acciones">
+                <button class="boton" id="btn-guardar-pin">Guardar PIN</button>
+              </div>
+              <div id="estado-pin" class="estado oculto"></div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- script principal -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
